@@ -27,9 +27,9 @@ void loop() {
 }
 
 //code to monitor street lights voltage and send sms aalert
-#define BLYNK_TEMPLATE_ID "TMPL3l4Js1Ckp"
-#define BLYNK_TEMPLATE_NAME "Street Light Fault Detection"
-#define BLYNK_AUTH_TOKEN "0-CrYn0DN-XmnWIMdAGmLraWB4Y2SOzd"
+#define BLYNK_TEMPLATE_ID "TMPL367dA5bUa"
+#define BLYNK_TEMPLATE_NAME "Street Light Fault DetectionCopy"
+#define BLYNK_AUTH_TOKEN "caXY1aUXns2yi9fILOpVoFiQr4Iz2wsJ"
 
 #define BLYNK_PRINT Serial
 #include <WiFi.h>
@@ -41,7 +41,7 @@ void loop() {
 #define BUZZER_PIN 27  
 
 char auth[] = BLYNK_AUTH_TOKEN;
-char ssid[] = "sanketh";        
+char ssid[] = "project";        
 char pass[] = "1234567890";    
 
 bool switchState = false;  // Switch state
@@ -87,21 +87,19 @@ void loop() {
         if (voltage1 < 10.0) {  // Voltage threshold for Bulb 1
             Blynk.logEvent("low_voltage_bulb1", "Bulb 1 has low voltage! Check the bulb.");
             lowVoltage = true;
+            tone(BUZZER_PIN, 1000); // 1kHz tone
+            delay(1000);
+            noTone(BUZZER_PIN);
+
         }
         
         if (voltage2 < 10.0) {  // Voltage threshold for Bulb 2
             Blynk.logEvent("low_voltage_bulb2", "Bulb 2 has low voltage! Check the bulb.");
             lowVoltage = true;
+            tone(BUZZER_PIN, 1000); // 1kHz tone
+            delay(1000);
+            noTone(BUZZER_PIN);
+
         }
     }
-
-    // Activate buzzer with tone if low voltage is detected
-    if (lowVoltage) {
-        tone(BUZZER_PIN, 1000); // 1kHz tone
-        delay(500);              // Beep duration
-        noTone(BUZZER_PIN);      // Stop beep
-    } 
-
-    delay(100);
 }
-
